@@ -21,12 +21,6 @@ export class ExpenseAddOrEditComponent {
   }
 
   onSubmit() {
-    if (this.expenseForm.valid) {
-      console.log('Form Submitted:', this.expenseForm.value);
-      alert('Expense Added Successfully!');
-      this.expenseForm.reset(); // Reset form after submission
-    } else {
-      alert('Please fill out all required fields correctly.');
-    }
+
   }
 }
