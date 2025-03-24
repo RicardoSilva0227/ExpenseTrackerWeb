@@ -1,1 +1,28 @@
-<p>expense-list works!</p>
+<h1 class="page-title">Expenses</h1>
+
+<div class="table-container">
+  <table class="expense-table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Code</th>
+        <th>Date of Emission</th>
+        <th>Expense Type</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let expense of expenses" [ngClass]="{'even-row': expense.id % 2 === 0}">
+        <td>{{ expense.id }}</td>
+        <td>{{ expense.code }}</td>
+        <td>{{ expense.dateOfEmission | date:'yyyy-MM-dd'}}</td>
+        <td>{{ expense.expenseTypeId }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="pagination-controls">
+  <button (click)="prevPage()" [disabled]="pageNumber === 1" class="pagination-button">Previous</button>
+  <button (click)="nextPage()" class="pagination-button">Next</button>
+  <p class="pagination-info">Page: {{ pageNumber }}</p>
+</div>
