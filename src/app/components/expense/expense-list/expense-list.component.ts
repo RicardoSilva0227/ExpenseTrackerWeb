@@ -18,7 +18,7 @@ export class ExpenseListComponent implements OnInit {
 
   constructor(
     private apiService: ApiService,
-    private _router: Router,
+    private router: Router,
   ) {}
 
 
@@ -34,9 +34,9 @@ export class ExpenseListComponent implements OnInit {
   
   SetExpense(id?:number){
     if(typeof id === 'undefined'){
-      this._router.navigate(['/Expense/AddOrEdit']);  
+      this.router.navigate(['/Expense/AddOrEdit']);  
     } else {
-      this._router.navigate(['/Expense/AddOrEdit', id]);  
+      this.router.navigate(['/Expense/AddOrEdit', id]);  
     }
   }
 
