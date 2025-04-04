@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { MatTableModule } from '@angular/material/table';
 import { ApiService } from '../../../services/api.service';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
+import { RedirectCommand } from '@angular/router';
 
 @Component({
   selector: 'app-expense-list',
@@ -14,7 +16,10 @@ export class ExpenseListComponent implements OnInit {
   pageSize: number = 10;
   pageNumber: number = 1;
 
-  constructor(private apiService: ApiService) {}
+  constructor(
+    private apiService: ApiService,
+    private _router: Router,
+  ) {}
 
 
   ngOnInit() {
@@ -25,6 +30,14 @@ export class ExpenseListComponent implements OnInit {
     this.apiService.getAll('Expenses/GetAllExpenses', this.pageSize, this.pageNumber).subscribe(response => {
       this.expenses = response.result;
     });
+  }
+  
+  SetExpense(id?:number){
+    if(typeof id === 'undefined'){
+      this._router.navigate(['/Expense/AddOrEdit']);  
+    } else {
+      this._router.navigate(['/Expense/AddOrEdit', id]);  
+    }
   }
 
   nextPage() {

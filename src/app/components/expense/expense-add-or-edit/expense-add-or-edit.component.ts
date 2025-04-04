@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule  } from '@angul
 import { CommonModule } from '@angular/common';
 import { ApiService } from '../../../services/api.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 
 
@@ -19,6 +20,7 @@ export class ExpenseAddOrEditComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private apiService: ApiService,
+    private router: Router,
     private snackBar: MatSnackBar) {
       
     }
@@ -31,6 +33,10 @@ export class ExpenseAddOrEditComponent implements OnInit {
       ExpenseTypeId: ['', Validators.required],
       Code: ['a']
     });
+  }
+
+  goBack(){
+    this.router.navigate(['Expense/List']);
   }
 
   onSubmit(model:any) {
