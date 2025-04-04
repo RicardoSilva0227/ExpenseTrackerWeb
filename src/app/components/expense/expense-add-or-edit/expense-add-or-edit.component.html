@@ -1,39 +1,39 @@
 <div class="form-container">
   <h2>Add Expense</h2>
-  <form [formGroup]="expenseForm" (ngSubmit)="onSubmit()" class="expense-form">
+  <form [formGroup]="expenseForm" (ngSubmit)="onSubmit(this.expenseForm.value)" class="expense-form">
     
     <!-- Code Input -->
     <div class="form-group">
-      <label for="code">Code</label>
-      <input type="text" id="name" formControlName="code" class="form-control">
-      <small *ngIf="expenseForm.controls['code'].invalid && expenseForm.controls['code'].touched" class="error-message">
-        Code is required (min. 3 characters).
+      <label for="Title">Title</label>
+      <input type="text" id="title" formControlName="Title" class="form-control">
+      <small *ngIf="expenseForm.controls['Title'].invalid && expenseForm.controls['Title'].touched" class="error-message">
+        Title is required (min. 3 characters).
       </small>
     </div>
 
     <!-- Date Input -->
     <div class="form-group">
-      <label for="dateOfEmission">Date of Emission</label>
-      <input type="date" id="dateOfEmission" formControlName="dateOfEmission" class="form-control">
-      <small *ngIf="expenseForm.controls['dateOfEmission'].invalid && expenseForm.controls['dateOfEmission'].touched" class="error-message">
+      <label for="DateOfEmission">Date of Emission</label>
+      <input type="date" id="dateOfEmission" formControlName="DateOfEmission" class="form-control">
+      <small *ngIf="expenseForm.controls['DateOfEmission'].invalid && expenseForm.controls['DateOfEmission'].touched" class="error-message">
         Please enter a valid date.
       </small>
     </div>
 
     <!-- Amount Input -->
     <div class="form-group">
-      <label for="amount">Amount (€)</label>
-      <input type="number" id="amount" formControlName="amount" class="form-control">
-      <small *ngIf="expenseForm.controls['amount'].invalid && expenseForm.controls['amount'].touched" class="error-message">
+      <label for="Amount">Amount (€)</label>
+      <input type="number" id="amount" formControlName="Amount" class="form-control">
+      <small *ngIf="expenseForm.controls['Amount'].invalid && expenseForm.controls['Amount'].touched" class="error-message">
         Amount must be greater than zero.
       </small>
     </div>
 
     <!-- Description Textarea -->
     <div class="form-group">
-      <label for="expenseType">Expense Type</label>
-      <textarea id="expenseType" formControlName="expenseType" class="form-control"></textarea>
-      <small *ngIf="expenseForm.controls['expenseType'].invalid && expenseForm.controls['expenseType'].touched" class="error-message">
+      <label for="ExpenseTypeId">Expense Type</label>
+      <textarea id="expenseTypeId" formControlName="ExpenseTypeId" class="form-control"></textarea>
+      <small *ngIf="expenseForm.controls['ExpenseTypeId'].invalid && expenseForm.controls['ExpenseTypeId'].touched" class="error-message">
         Expense Type is required.
       </small>
     </div>

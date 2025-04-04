@@ -6,6 +6,7 @@
       <tr>
         <th>ID</th>
         <th>Code</th>
+        <th>Title</th>
         <th>Date of Emission</th>
         <th>Expense Type</th>
       </tr>
@@ -14,6 +15,7 @@
       <tr *ngFor="let expense of expenses" [ngClass]="{'even-row': expense.id % 2 === 0}">
         <td>{{ expense.id }}</td>
         <td>{{ expense.code }}</td>
+        <td>{{ expense.title }}</td>
         <td>{{ expense.dateOfEmission | date:'yyyy-MM-dd'}}</td>
         <td>{{ expense.expenseTypeId }}</td>
       </tr>
