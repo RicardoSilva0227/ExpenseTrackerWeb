@@ -37,13 +37,15 @@ export class ExpenseAddOrEditComponent implements OnInit {
       this.apiService.getById('Expenses/GetExpense', this._id).subscribe({
         next: (response) => {
           if (response.isSuccess){
+
             this.expenseForm =  this.fb.group({
               Title: [response.result.title, [Validators.required, Validators.minLength(3)]],
               Amount: [response.result.amount, [Validators.required, Validators.min(1)]],
-              DateOfEmission: [response.result.dateOfemission, [Validators.required]],
+              DateOfEmission: [this.formatDateForInput(response.result.dateOfEmission), [Validators.required]],
               ExpenseTypeId: [response.result.expenseTypeId, Validators.required],
               Code: ['a'] // make code not required on the backend
             });
+            
           }
         },
         error: (error) => {
@@ -81,6 +83,11 @@ export class ExpenseAddOrEditComponent implements OnInit {
         });
       }
     });
+  }
+
+  private formatDateForInput(dateString: string | null): string {
+    if (!dateString) return '';
+    return new Date(dateString).toISOString().split('T')[0];
   }
 
   goBack(){
