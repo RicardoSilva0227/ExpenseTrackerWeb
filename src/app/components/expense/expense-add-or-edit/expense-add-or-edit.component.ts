@@ -33,17 +33,22 @@ export class ExpenseAddOrEditComponent implements OnInit {
     }
 
   ngOnInit() {
+    this.initializeForm();
+  }
+
+  initializeForm(){
     if (this._id) {
       this.apiService.getById('Expenses/GetExpense', this._id).subscribe({
         next: (response) => {
           if (response.isSuccess){
 
             this.expenseForm =  this.fb.group({
+              Id: [response.result.id],
+              Code: [response.result.code],
               Title: [response.result.title, [Validators.required, Validators.minLength(3)]],
               Amount: [response.result.amount, [Validators.required, Validators.min(1)]],
               DateOfEmission: [this.formatDateForInput(response.result.dateOfEmission), [Validators.required]],
-              ExpenseTypeId: [response.result.expenseTypeId, Validators.required],
-              Code: ['a'] // make code not required on the backend
+              ExpenseTypeId: [response.result.expenseTypeId, Validators.required]
             });
             
           }
@@ -57,17 +62,17 @@ export class ExpenseAddOrEditComponent implements OnInit {
       });
     } else {
       this.expenseForm = this.fb.group({
+        Id: [''],
+        Code: [''],
         Title: ['', [Validators.required, Validators.minLength(3)]],
         Amount: ['', [Validators.required, Validators.min(1)]],
         DateOfEmission: ['', [Validators.required]],
         ExpenseTypeId: ['', Validators.required],
-        Code: ['a'] // make code not required on the backend
       });
     }
 
     this.loadExpenseType();
   }
-
 
   loadExpenseType(){
     this.apiService.getAll('ExpensesTypes/GetAllExpenseTypes').subscribe({
@@ -85,6 +90,7 @@ export class ExpenseAddOrEditComponent implements OnInit {
     });
   }
 
+  // remove the hours part of the date
   private formatDateForInput(dateString: string | null): string {
     if (!dateString) return '';
     return new Date(dateString).toISOString().split('T')[0];
@@ -95,21 +101,40 @@ export class ExpenseAddOrEditComponent implements OnInit {
   }
 
   onSubmit(model:any) {
-    this.apiService.create('Expenses/CreateExpense', model).subscribe({
-      next: (response) => {
-        if (response.isSuccess) {
-          this.snackBar.open('Expense added successfully!', 'Close', {
+    if (this._id){
+      this.apiService.update('Expenses/UpdateExpense', this._id, model).subscribe({
+        next: (response) => {
+          if (response.isSuccess) {
+            this.snackBar.open('Expense updated successfully!', 'Close', {
+              duration: 4000,
+              panelClass: ['success-snackbar']
+            });
+          }
+        },
+        error: (error) => {
+          this.snackBar.open('Failed to update expense.', 'Close', {
             duration: 4000,
-            panelClass: ['success-snackbar']
+            panelClass: ['error-snackbar']
           });
         }
-      },
-      error: (error) => {
-        this.snackBar.open('Failed to add expense.', 'Close', {
-          duration: 4000,
-          panelClass: ['error-snackbar']
-        });
-      }
-    });
+      });
+    } else {
+      this.apiService.create('Expenses/CreateExpense', model).subscribe({
+        next: (response) => {
+          if (response.isSuccess) {
+            this.snackBar.open('Expense added successfully!', 'Close', {
+              duration: 4000,
+              panelClass: ['success-snackbar']
+            });
+          }
+        },
+        error: (error) => {
+          this.snackBar.open('Failed to add expense.', 'Close', {
+            duration: 4000,
+            panelClass: ['error-snackbar']
+          });
+        }
+      });
+    }
   }
 }

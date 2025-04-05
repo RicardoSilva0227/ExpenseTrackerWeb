@@ -31,7 +31,7 @@ export class ApiService {
 
   // Generic method to UPDATE an item by ID
   update(controller: string, id: number, data: any): Observable<any> {
-    return this.http.put<any>(`${this.apiUrl}${controller}/${id}`, data);
+    return this.http.put<any>(`${this.apiUrl}${controller}?id=${id}`, data);
   }
 
   // Generic method to DELETE an item by ID
