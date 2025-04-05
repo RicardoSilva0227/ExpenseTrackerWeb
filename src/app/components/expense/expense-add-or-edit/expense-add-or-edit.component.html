@@ -32,14 +32,16 @@
       </small>
     </div>
 
-    <!-- Description Textarea -->
     <div class="form-group">
-      <label for="ExpenseTypeId">Expense Type</label>
-      <textarea id="expenseTypeId" formControlName="ExpenseTypeId" class="form-control"></textarea>
-      <small *ngIf="expenseForm.controls['ExpenseTypeId'].invalid && expenseForm.controls['ExpenseTypeId'].touched" class="error-message">
-        Expense Type is required.
-      </small>
-    </div>
+      <mat-form-field appearance="outline">
+        <mat-label>Expense Types</mat-label>
+        <mat-select id="ExpenseTypeId" formControlName="ExpenseTypeId">
+          <mat-option *ngFor="let expenseType of expenseTypes" [value]="expenseType.id">
+            {{ expenseType.code }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>  
 
     <!-- Submit Button -->
     <div class="form-group">

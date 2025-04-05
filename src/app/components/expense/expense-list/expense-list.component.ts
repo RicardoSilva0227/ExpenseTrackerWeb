@@ -32,11 +32,11 @@ export class ExpenseListComponent implements OnInit {
     });
   }
   
-  SetExpense(id?:number){
+  SetEditExpense(id?:number){
     if(typeof id === 'undefined'){
       this.router.navigate(['/Expense/AddOrEdit']);  
     } else {
-      this.router.navigate(['/Expense/AddOrEdit', id]);  
+      this.router.navigate(['/Expense/AddOrEdit/', id]);  
     }
   }
 

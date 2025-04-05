@@ -9,5 +9,6 @@ export const routes: Routes = [
   // Expenses
   { path: 'Expense/List', component: ExpenseListComponent },
   { path: 'Expense/AddOrEdit', component: ExpenseAddOrEditComponent },
+  { path: 'Expense/AddOrEdit/:id', component: ExpenseAddOrEditComponent },
 ];
   

@@ -21,7 +21,7 @@ export class ApiService {
 
   // Generic method to GET a single item by ID
   getById(controller: string, id: number): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}${controller}/${id}`);
+    return this.http.get<any>(`${this.apiUrl}${controller}?id=${id}`);
   }
 
   // Generic method to CREATE a new item

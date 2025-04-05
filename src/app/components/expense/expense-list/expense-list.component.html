@@ -1,27 +1,27 @@
 <h1 class="page-title">Expenses</h1>
 
 <div class="container">
-  <button type="button" class="btn btn-primary" (click)="SetExpense()">+ Add</button>
+  <button type="button" class="btn btn-primary" (click)="SetEditExpense()">+ Add</button>
 </div>
 
 <div class="table-container">
   <table class="expense-table">
     <thead>
       <tr>
-        <th>ID</th>
-        <th>Code</th>
         <th>Title</th>
-        <th>Date of Emission</th>
+        <th>amount</th>
         <th>Expense Type</th>
+        <th>Date of Emission</th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let expense of expenses" [ngClass]="{'even-row': expense.id % 2 === 0}">
-        <td>{{ expense.id }}</td>
-        <td>{{ expense.code }}</td>
         <td>{{ expense.title }}</td>
+        <td>{{ expense.amount }} €</td>
+        <td>{{ expense.expenseType.code }}</td>
         <td>{{ expense.dateOfEmission | date:'yyyy-MM-dd'}}</td>
-        <td>{{ expense.expenseTypeId }}</td>
+        <td><button class="edit-button" (click)="SetEditExpense(expense.id)">Edit</button></td>
       </tr>
     </tbody>
   </table>
