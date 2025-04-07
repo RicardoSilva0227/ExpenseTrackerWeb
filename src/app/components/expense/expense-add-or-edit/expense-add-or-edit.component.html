@@ -1,0 +1,51 @@
+<button type="button" class="btn btn-primary" (click)="goBack()">Go back</button>
+
+
+<div class="form-container" *ngIf="expenseForm">
+  <h2>Add Expense</h2>
+  <form [formGroup]="expenseForm" (ngSubmit)="onSubmit(this.expenseForm.value)" class="expense-form">
+    
+    <!-- Code Input -->
+    <div class="form-group">
+      <label for="Title">Title</label>
+      <input type="text" id="title" formControlName="Title" class="form-control">
+      <small *ngIf="expenseForm.controls['Title'].invalid && expenseForm.controls['Title'].touched" class="error-message">
+        Title is required (min. 3 characters).
+      </small>
+    </div>
+
+    <!-- Date Input -->
+    <div class="form-group">
+      <label for="DateOfEmission">Date of Emission</label>
+      <input type="date" id="dateOfEmission" formControlName="DateOfEmission" class="form-control">
+      <small *ngIf="expenseForm.controls['DateOfEmission'].invalid && expenseForm.controls['DateOfEmission'].touched" class="error-message">
+        Please enter a valid date.
+      </small>
+    </div>
+
+    <!-- Amount Input -->
+    <div class="form-group">
+      <label for="Amount">Amount (€)</label>
+      <input type="number" id="amount" formControlName="Amount" class="form-control">
+      <small *ngIf="expenseForm.controls['Amount'].invalid && expenseForm.controls['Amount'].touched" class="error-message">
+        Amount must be greater than zero.
+      </small>
+    </div>
+
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>Expense Types</mat-label>
+        <mat-select id="ExpenseTypeId" formControlName="ExpenseTypeId">
+          <mat-option *ngFor="let expenseType of expenseTypes" [value]="expenseType.id">
+            {{ expenseType.code }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>  
+
+    <!-- Submit Button -->
+    <div class="form-group">
+      <button type="submit" class="submit-button" [disabled]="expenseForm.invalid">Submit</button>
+    </div>
+  </form>
+</div>
