@@ -1,0 +1,87 @@
+/* Check if i can make anything a global style */
+
+/* Page Title */
+/* Page Title */
+.page-title {
+    text-align: center;
+    font-size: 32px;
+    color: #f0f0f0;  /* Light color for dark mode */
+    margin-bottom: 20px;
+  }
+  
+  /* Table Container */
+  .table-container {
+    margin: 0 auto;
+    max-width: 90%;
+    overflow-x: auto;
+  }
+  
+  /* Table Styling */
+  .expense-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    background-color: #2c2c2c;  /* Darker background for table */
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    color: #f0f0f0;  /* Light text color for readability */
+  }
+  
+  /* Table Header Styling */
+  .expense-table thead {
+    background-color: #007bff;  /* Bright blue header */
+    color: #fff;
+  }
+  
+  .expense-table th {
+    padding: 10px;
+    text-align: left;
+    font-weight: bold;
+  }
+  
+  /* Table Body Styling */
+  .expense-table td {
+    padding: 10px;
+    text-align: left;
+    border-top: 1px solid #444;  /* Darker border for separation */
+  }
+  
+  /* Alternating Row Colors */
+  .expense-table .even-row {
+    background-color: #444444;  /* Darker background for even rows */
+  }
+  
+  /* Pagination Controls */
+  .pagination-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  .pagination-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin: 0 10px;
+  }
+  
+  .pagination-button:hover:enabled {
+    background-color: #0056b3;
+  }
+  
+  .pagination-button:disabled {
+    background-color: #888;
+    cursor: not-allowed;
+  }
+  
+  /* Pagination Info */
+  .pagination-info {
+    font-size: 16px;
+    color: #f0f0f0;  /* Light color for readability */
+  }
+  

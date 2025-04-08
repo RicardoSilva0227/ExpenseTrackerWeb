@@ -1,0 +1,34 @@
+<button type="button" class="btn btn-primary" (click)="goBack()">Go back</button>
+
+
+<div class="form-container" *ngIf="expenseTypesForm">
+  <h2>Add Expense</h2>
+  <form [formGroup]="expenseTypesForm" (ngSubmit)="onSubmit(this.expenseTypesForm.value)" class="expense-form">
+    
+    <!-- Code Input -->
+    <div class="form-group">
+      <label for="Code">Code</label>
+      <input type="text" id="code" formControlName="code" class="form-control">
+      <small *ngIf="expenseTypesForm.controls['code'].invalid && expenseTypesForm.controls['code'].touched" class="error-message">
+        Code is required (min. 3 characters).
+      </small>
+    </div>
+
+    <!-- Code Input -->
+    <div class="form-group">
+        <label for="Description">Description</label>
+        <input type="text" id="description" formControlName="description" class="form-control">
+    </div>
+
+    <!-- Code Input -->
+    <div class="form-group">
+        <label for="Icon">Icon</label>
+        <input type="text" id="icon" formControlName="icon" class="form-control">        
+    </div>
+
+    <!-- Submit Button -->
+    <div class="form-group">
+      <button type="submit" class="submit-button" [disabled]="expenseTypesForm.invalid">Submit</button>
+    </div>
+  </form>
+</div>
