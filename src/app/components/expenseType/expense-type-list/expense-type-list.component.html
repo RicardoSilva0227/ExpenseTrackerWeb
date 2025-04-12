@@ -10,6 +10,7 @@
       <tr>
         <th>Code</th>
         <th>Description</th>
+        <th>Icon</th>
         <th></th>
       </tr>
     </thead>
@@ -17,6 +18,7 @@
       <tr *ngFor="let expenseType of expenseTypes" [ngClass]="{'even-row': expenseType.id % 2 === 0}">
         <td>{{ expenseType.code }}</td>
         <td>{{ expenseType.description }}</td>
+        <td>{{ expenseType.icon }}</td>
         <td><button class="edit-button" (click)="SetEditExpenseType(expenseType.id)">Edit</button></td>
       </tr>
     </tbody>
