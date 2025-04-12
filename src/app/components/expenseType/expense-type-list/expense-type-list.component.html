@@ -1,0 +1,32 @@
+<h1 class="page-title">Expenses</h1>
+
+<div class="container">
+  <button type="button" class="btn btn-primary" (click)="SetEditExpenseType()">+ Add</button>
+</div>
+
+<div class="table-container">
+  <table class="expense-table">
+    <thead>
+      <tr>
+        <th>Code</th>
+        <th>Description</th>
+        <th>Icon</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let expenseType of expenseTypes" [ngClass]="{'even-row': expenseType.id % 2 === 0}">
+        <td>{{ expenseType.code }}</td>
+        <td>{{ expenseType.description }}</td>
+        <td>{{ expenseType.icon }}</td>
+        <td><button class="edit-button" (click)="SetEditExpenseType(expenseType.id)">Edit</button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="pagination-controls">
+  <button (click)="prevPage()" [disabled]="pageNumber === 1" class="pagination-button">Previous</button>
+  <button (click)="nextPage()" class="pagination-button">Next</button>
+  <p class="pagination-info">Page: {{ pageNumber }}</p>
+</div>
