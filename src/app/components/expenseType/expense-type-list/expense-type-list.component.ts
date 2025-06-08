@@ -3,6 +3,8 @@ import { MatTableModule } from '@angular/material/table';
 import { ApiService } from '../../../services/api.service';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
 
 @Component({
   selector: 'app-expense-type-list',
@@ -19,6 +21,7 @@ export class ExpenseTypeListComponent {
   constructor(
     private apiService: ApiService,
     private router: Router,
+    private snackBar: MatSnackBar,
   ) {}
 
   ngOnInit() {
@@ -30,6 +33,8 @@ export class ExpenseTypeListComponent {
       this.expenseTypes = response.result;
     });
   }
+
+
   
   SetEditExpenseType(id?:number){
     if(typeof id === 'undefined'){
@@ -38,6 +43,35 @@ export class ExpenseTypeListComponent {
       this.router.navigate(['/ExpenseType/AddOrEdit/', id]);  
     }
   }
+
+
+  DeleteExpenseType(id?:number){
+    if(id) {
+       this.apiService.delete('ExpensesTypes/DeleteExpenseTypes', id).subscribe({
+        next: (response) => {
+          if (response.isSuccess) {
+            this.snackBar.open('Expense type deleted successfully!', 'Close', {
+              duration: 4000,
+              panelClass: ['success-snackbar']
+            });
+          }
+          this.fetchExpenseTypes();
+        },
+        error: (error) => {
+          this.snackBar.open('Failed to delete expense type.', 'Close', {
+            duration: 4000,
+            panelClass: ['error-snackbar']
+          });
+        }
+      });
+    } else {
+      this.snackBar.open('Id does not exist.', 'Close', {
+            duration: 3000,
+            panelClass: ['error-snackbar']
+          });
+    }
+  }
+
 
   nextPage() {
     this.pageNumber++;

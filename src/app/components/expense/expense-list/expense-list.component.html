@@ -13,6 +13,7 @@
         <th>Expense Type</th>
         <th>Date of Emission</th>
         <th></th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
@@ -22,6 +23,8 @@
         <td>{{ expense.expenseType.code }}</td>
         <td>{{ expense.dateOfEmission | date:'yyyy-MM-dd'}}</td>
         <td><button class="edit-button" (click)="SetEditExpense(expense.id)">Edit</button></td>
+        <td><button class="delete-button" (click)="DeleteExpense(expense.id)">Delete</button></td>
+
       </tr>
     </tbody>
   </table>

@@ -4,6 +4,8 @@ import { ApiService } from '../../../services/api.service';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { RedirectCommand } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
 
 @Component({
   selector: 'app-expense-list',
@@ -19,6 +21,7 @@ export class ExpenseListComponent implements OnInit {
   constructor(
     private apiService: ApiService,
     private router: Router,
+    private snackBar: MatSnackBar,
   ) {}
 
 
@@ -39,6 +42,35 @@ export class ExpenseListComponent implements OnInit {
       this.router.navigate(['/Expense/AddOrEdit/', id]);  
     }
   }
+
+  DeleteExpense(id?:number){
+    if(id) {
+       this.apiService.delete('Expenses/DeleteExpense', id).subscribe({
+        next: (response) => {
+          if (response.isSuccess) {
+            this.snackBar.open('Expense deleted successfully!', 'Close', {
+              duration: 4000,
+              panelClass: ['success-snackbar']
+            });
+
+            this.fetchExpenses();
+          }
+        },
+        error: (error) => {
+          this.snackBar.open('Failed to delete expense.', 'Close', {
+            duration: 4000,
+            panelClass: ['error-snackbar']
+          });
+        }
+      });
+    } else {
+      this.snackBar.open('Id does not exist.', 'Close', {
+            duration: 3000,
+            panelClass: ['error-snackbar']
+          });
+    }
+  }
+
 
   nextPage() {
     this.pageNumber++;
