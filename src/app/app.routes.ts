@@ -4,6 +4,7 @@ import { ExpenseListComponent } from './components/expense/expense-list/expense-
 import { ExpenseAddOrEditComponent } from './components/expense/expense-add-or-edit/expense-add-or-edit.component';
 import { ExpenseTypeListComponent } from './components/expenseType/expense-type-list/expense-type-list.component';
 import { ExpenseTypeAddOrEditComponent } from './components/expenseType/expense-type-add-or-edit/expense-type-add-or-edit.component';
+import { ConfigsComponent } from './components/configs/configs.component'
 
 
 export const routes: Routes = [
@@ -18,5 +19,8 @@ export const routes: Routes = [
   { path: 'ExpenseType/List', component: ExpenseTypeListComponent },
   { path: 'ExpenseType/AddOrEdit', component: ExpenseTypeAddOrEditComponent },
   { path: 'ExpenseType/AddOrEdit/:id', component: ExpenseTypeAddOrEditComponent },
+
+  // configs
+  {path: 'Configs', component: ConfigsComponent},
 ];
   
