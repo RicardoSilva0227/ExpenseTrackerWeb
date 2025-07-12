@@ -38,4 +38,12 @@ export class ApiService {
   delete(controller: string, id: number): Observable<any> {
     return this.http.delete<any>(`${this.apiUrl}${controller}/${id}`);
   }
+
+  import(controller: string, file: File): Observable<any> {
+    const formData = new FormData();
+    formData.append('file', file);
+
+    return this.http.post<any>(`${this.apiUrl}${controller}`, formData);
+  }
+
 }
