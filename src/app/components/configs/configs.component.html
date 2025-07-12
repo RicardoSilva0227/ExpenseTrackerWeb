@@ -1,0 +1,28 @@
+<div class="form-container" *ngIf="configsForm">
+  <h2>Configs</h2>
+  <form [formGroup]="configsForm" class="expense-form">
+    
+    <!-- Currency Input -->
+    <div class="form-group">
+      <label for="Title">Currency</label>
+      <input type="text" id="currencyId" formControlName="CurrencyId" class="form-control">
+      <small *ngIf="configsForm.controls['CurrencyId'].invalid && configsForm.controls['CurrencyId'].touched" class="error-message">
+        Title is required (min. 3 characters).
+      </small>
+    </div>
+
+    <!-- invoice Input -->
+    <div class="form-group">
+      <label for="Amount">Invoice Path</label>
+      <input type="text" id="invoicePath" formControlName="InvoicePath" class="form-control">
+      <small *ngIf="configsForm.controls['InvoicePath'].invalid && configsForm.controls['InvoicePath'].touched" class="error-message">
+        path must bind to a folder.
+      </small>
+    </div>
+
+    <!-- Submit Button -->
+    <div class="form-group">
+      <button type="submit" class="submit-button" [disabled]="configsForm.invalid">Submit</button>
+    </div>
+  </form>
+</div>
