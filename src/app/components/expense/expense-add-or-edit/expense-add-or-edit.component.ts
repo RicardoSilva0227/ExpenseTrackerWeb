@@ -47,6 +47,7 @@ export class ExpenseAddOrEditComponent implements OnInit {
               Code: [response.result.code],
               Title: [response.result.title, [Validators.required, Validators.minLength(3)]],
               Amount: [response.result.amount, [Validators.required, Validators.min(1)]],
+              Tin: [response.result.tin, [Validators.minLength(9), Validators.maxLength(9)]],
               DateOfEmission: [this.formatDateForInput(response.result.dateOfEmission), [Validators.required]],
               ExpenseTypeId: [response.result.expenseTypeId, Validators.required]
             });
@@ -62,10 +63,10 @@ export class ExpenseAddOrEditComponent implements OnInit {
       });
     } else {
       this.expenseForm = this.fb.group({
-        Id: [''],
         Code: [''],
         Title: ['', [Validators.required, Validators.minLength(3)]],
         Amount: ['', [Validators.required, Validators.min(1)]],
+        Tin: ['', [Validators.minLength(9), Validators.maxLength(9)]],
         DateOfEmission: ['', [Validators.required]],
         ExpenseTypeId: ['', Validators.required],
       });
