@@ -32,6 +32,15 @@
       </small>
     </div>
 
+    <!-- TIN / NIF -->
+    <div class="form-group">
+      <label for="Amount">TIN / NIF</label>
+      <input type="number" id="tin" formControlName="Tin" class="form-control" [required]="false" [minlength]="9" [maxlength]="9">
+      <small *ngIf="expenseForm.controls['Tin'].invalid && expenseForm.controls['Tin'].touched" class="error-message">
+        Must have 9 numbers
+      </small>
+    </div>
+
     <div class="form-group">
       <mat-form-field appearance="outline">
         <mat-label>Expense Types</mat-label>

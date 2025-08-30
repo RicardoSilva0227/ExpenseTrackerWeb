@@ -11,6 +11,7 @@
         <th>Title</th>
         <th>amount</th>
         <th>Expense Type</th>
+        <th>Tin / Nif</th>
         <th>Date of Emission</th>
         <th></th>
         <th></th>
@@ -21,6 +22,7 @@
         <td>{{ expense.title }}</td>
         <td>{{ expense.amount }} €</td>
         <td>{{ expense.expenseType.code }}</td>
+        <td>{{ expense.tin }}</td>
         <td>{{ expense.dateOfEmission | date:'yyyy-MM-dd'}}</td>
         <td><button class="edit-button" (click)="SetEditExpense(expense.id)">Edit</button></td>
         <td><button class="delete-button" (click)="DeleteExpense(expense.id)">Delete</button></td>
