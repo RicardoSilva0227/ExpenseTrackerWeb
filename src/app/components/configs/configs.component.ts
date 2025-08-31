@@ -17,6 +17,8 @@ export class ConfigsComponent implements OnInit {
     model: any;
     configsForm!: FormGroup; //the "!" tells angular to ignore if the class is already initialized or not
     private _id!: number;
+    Currencies: any[] = [];
+
 
 
   constructor(
@@ -38,7 +40,6 @@ export class ConfigsComponent implements OnInit {
             this.configsForm =  this.fb.group({
               Id: [response.result.id],
               CurrencyId: [response.result.CurrencyId, [Validators.required]],
-              InvoicePath: [response.result.InvoicePath, [Validators.required]],              
             });            
           }
         },
@@ -51,11 +52,79 @@ export class ConfigsComponent implements OnInit {
       });
     } else {
       this.configsForm = this.fb.group({
-        Id: [''],
         CurrencyId: ['', [Validators.required]],
-        InvoicePath: ['', [Validators.required]],
       });
     }
-  }
-}
 
+    this.loadCurrencies();
+  }
+
+
+    loadCurrencies(){
+    this.apiService.getAll('Configs/Currency/GetAllCurrencies').subscribe({
+      next: (response) => {
+        if (response.isSuccess){
+          this.Currencies = response.result;
+        }
+      },
+      error: (error) => {
+        this.snackBar.open('Failed to fetch currencies.', 'Close', {
+          duration: 3000,
+          panelClass: ['error-snackbar']
+        });
+      }
+    });
+  }
+
+
+  onSubmit(model:any) {
+    // if (this._id){
+    //   this.apiService.update('Expenses/UpdateExpense', this._id, model).subscribe({
+    //     next: (response) => {
+    //       if (response.isSuccess) {
+    //         this.snackBar.open('Expense updated successfully!', 'Close', {
+    //           duration: 4000,
+    //           panelClass: ['success-snackbar']
+    //         });
+    //       }
+    //     },
+    //     error: (error) => {
+    //       this.snackBar.open('Failed to update expense.', 'Close', {
+    //         duration: 4000,
+    //         panelClass: ['error-snackbar']
+    //       });
+    //     }
+    //   });
+    // } else {
+    //   this.apiService.create('Expenses/CreateExpense', model).subscribe({
+    //     next: (response) => {
+    //       if (response.isSuccess) {
+    //         this.snackBar.open('Expense added successfully!', 'Close', {
+    //           duration: 4000,
+    //           panelClass: ['success-snackbar']
+    //         });
+    //       }
+    //     },
+    //     error: (error) => {
+    //       this.snackBar.open('Failed to add expense.', 'Close', {
+    //         duration: 4000,
+    //         panelClass: ['error-snackbar']
+    //       });
+    //     }
+    //   });
+    // }
+  }
+
+
+  // onFolderSelected(event: Event) {
+  //   const input = event.target as HTMLInputElement;
+  //   if (input.files && input.files.length > 0) {
+  //     const firstFile = input.files[0] as any;
+  //     const relativePath: string = firstFile.webkitRelativePath;
+  //     const folderName = relativePath.split('/')[0]; // take top-level folder name
+
+  //     // Update the form control with the folder name
+  //     this.configsForm.get('InvoicePath')?.setValue(folderName);
+  //   }
+  // }
+}
