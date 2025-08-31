@@ -1,0 +1,22 @@
+<div class="form-container" *ngIf="configsForm">
+  <h2>Configs</h2>
+  <form [formGroup]="configsForm" class="configs-form">
+    
+    <!-- Currency Input -->
+    <div class="form-group" >
+      <mat-form-field appearance="outline" style="width: 100%;">
+        <mat-label>Currency</mat-label>
+        <mat-select id="CurrencyId" formControlName="CurrencyId">
+          <mat-option *ngFor="let Currency of Currencies" [value]="Currency.id">
+            {{ Currency.acronym }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>  
+
+    <!-- Submit Button -->
+    <div class="form-group">
+      <button type="submit" class="submit-button" [disabled]="configsForm.invalid">Submit</button>
+    </div>
+  </form>
+</div>

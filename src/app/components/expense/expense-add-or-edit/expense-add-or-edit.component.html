@@ -42,7 +42,7 @@
     </div>
 
     <div class="form-group">
-      <mat-form-field appearance="outline">
+      <mat-form-field appearance="outline" style="width: 100%;">
         <mat-label>Expense Types</mat-label>
         <mat-select id="ExpenseTypeId" formControlName="ExpenseTypeId">
           <mat-option *ngFor="let expenseType of expenseTypes" [value]="expenseType.id">
