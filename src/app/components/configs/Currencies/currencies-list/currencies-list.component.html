@@ -1,0 +1,36 @@
+<h1 class="page-title">Currencies List</h1>
+
+<div class="container">
+  <button type="button" class="btn btn-primary" (click)="SetEditCurrency()">+ Add</button>
+</div>
+
+<div class="table-container">
+  <table class="expense-table">
+    <thead>
+      <tr>
+        <th>Acronym</th>
+        <th>Name</th>
+        <th>Symbol</th>
+        <th>Is Default</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let currency of currencies" [ngClass]="{'even-row': currency.id % 2 === 0}">
+        <td>{{ currency.acronym }}</td>
+        <td>{{ currency.name }}</td>
+        <td>{{ currency.symbol }}</td>
+        <td>{{ currency.isDefault }}</td>
+        <td><button class="edit-button" (click)="SetEditCurrency(currency.id)">Edit</button></td>
+        <td><button class="delete-button" (click)="DeleteCurrency(currency.id)">Delete</button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="pagination-controls">
+  <button (click)="prevPage()" [disabled]="pageNumber === 1" class="pagination-button">Previous</button>
+  <button (click)="nextPage()" class="pagination-button">Next</button>
+  <p class="pagination-info">Page: {{ pageNumber }}</p>
+</div>

@@ -1,0 +1,83 @@
+<button type="button" class="btn btn-primary" (click)="goBack()">Go back</button>
+
+
+<div class="form-container" *ngIf="currencyForm">
+  <h2>Add Currency</h2>
+
+  <form [formGroup]="currencyForm" (ngSubmit)="onSubmit(currencyForm.value)" class="currency-form">
+
+    <!-- Name -->
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input type="text" id="name" formControlName="name" class="form-control">
+      <small *ngIf="currencyForm.controls['name'].invalid && currencyForm.controls['name'].touched" class="error-message">
+        Name is required.
+      </small>
+    </div>
+
+    <!-- Acronym -->
+    <div class="form-group">
+      <label for="acronym">Acronym</label>
+      <input type="text" id="acronym" formControlName="acronym" class="form-control">
+      <small *ngIf="currencyForm.controls['acronym'].invalid && currencyForm.controls['acronym'].touched" class="error-message">
+        Acronym is required.
+      </small>
+    </div>
+
+    <!-- Symbol -->
+    <div class="form-group">
+      <label for="symbol">Symbol</label>
+      <input type="text" id="symbol" formControlName="symbol" class="form-control">
+      <small *ngIf="currencyForm.controls['symbol'].invalid && currencyForm.controls['symbol'].touched" class="error-message">
+        Symbol is required.
+      </small>
+    </div>
+
+    <!-- Decimal Places -->
+    <div class="form-group">
+      <label for="decimalPlaces">Decimal Places</label>
+      <input type="number" id="decimalPlaces" formControlName="decimalPlaces" class="form-control">
+      <small *ngIf="currencyForm.controls['decimalPlaces'].invalid && currencyForm.controls['decimalPlaces'].touched" class="error-message">
+        Decimal places are required.
+      </small>
+    </div>
+
+    <!-- Culture Code -->
+    <div class="form-group">
+      <label for="cultureCode">Culture Code</label>
+      <input type="text" id="cultureCode" formControlName="cultureCode" class="form-control" placeholder="e.g. en-US">
+      <small *ngIf="currencyForm.controls['cultureCode'].invalid && currencyForm.controls['cultureCode'].touched" class="error-message">
+        Culture code is required.
+      </small>
+    </div>
+
+    <!-- Exchange Rate To Base -->
+    <div class="form-group">
+      <label for="exchangeRateToBase">Exchange Rate to Base</label>
+      <input type="number" step="0.0001" id="exchangeRateToBase" formControlName="exchangeRateToBase" class="form-control">
+    </div>
+
+    <!-- Country -->
+    <div class="form-group">
+      <label for="country">Country</label>
+      <input type="text" id="country" formControlName="country" class="form-control">
+    </div>
+
+    <!-- Flags -->
+    <div class="form-group checkbox-group">
+      <label>
+        <input type="checkbox" formControlName="isDefault"> Default Currency
+      </label>
+      <label>
+        <input type="checkbox" formControlName="isCrypto"> Is Cryptocurrency
+      </label>
+    </div>
+
+    <!-- Submit Button -->
+    <div class="form-group">
+            <button type="submit" class="submit-button" [disabled]="currencyForm.invalid">Submit</button>
+
+    </div>
+
+  </form>
+</div>
