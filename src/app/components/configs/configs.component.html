@@ -1,18 +1,89 @@
 <div class="form-container" *ngIf="configsForm">
   <h2>Configs</h2>
-  <form [formGroup]="configsForm" class="configs-form">
+  <form [formGroup]="configsForm" (ngSubmit)="onSubmit(configsForm.value)" class="configs-form">
+
+    <!-- Enable FTP Switch -->
+    <div class="form-group">
+      <mat-slide-toggle formControlName="useFtp">
+        Use FTP for invoices
+      </mat-slide-toggle>
+    </div>
     
-    <!-- Currency Input -->
-    <div class="form-group" >
-      <mat-form-field appearance="outline" style="width: 100%;">
-        <mat-label>Currency</mat-label>
-        <mat-select id="CurrencyId" formControlName="CurrencyId">
-          <mat-option *ngFor="let Currency of Currencies" [value]="Currency.id">
-            {{ Currency.acronym }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-    </div>  
+    <!-- FTP Configs (only if useFtp is true) -->
+    <div *ngIf="configsForm.get('useFtp')?.value">
+      <h3>FTP Settings</h3>
+      <div class="form-group">
+        <label for="ftpServer">FTP Server</label>
+        <input type="text" id="ftpServer" formControlName="ftpServer" class="form-control" placeholder="ftp://127.0.0.1">
+      </div>
+
+      <div class="form-group">
+        <label for="ftpUsername">FTP Username</label>
+        <input type="text" id="ftpUsername" formControlName="ftpUsername" class="form-control" placeholder="ftpuser">
+      </div>
+
+      <div class="form-group">
+        <label for="ftpPassword">FTP Password</label>
+        <input type="password" id="ftpPassword" formControlName="ftpPassword" class="form-control">
+      </div>
+
+      <div class="form-group">
+        <label for="ftpPort">FTP Port</label>
+        <input type="text" id="ftpPort" formControlName="ftpPort" class="form-control">
+      </div>
+
+      <hr>
+    </div>
+
+    <!-- SMTP Settings -->
+    <h3>Email Settings</h3>
+    <div class="form-group">
+      <label for="smtpServer">SMTP Server</label>
+      <input type="text" id="smtpServer" formControlName="smtpServer" class="form-control">
+    </div>
+
+    <div class="form-group">
+      <label for="smtpPort">SMTP Port</label>
+      <input type="text" id="smtpPort" formControlName="smtpPort" class="form-control">
+    </div>
+
+    <div class="form-group">
+      <label for="smtpUsername">SMTP Username</label>
+      <input type="text" id="smtpUsername" formControlName="smtpUsername" class="form-control">
+    </div>
+
+    <div class="form-group">
+      <label for="smtpPassword">SMTP Password</label>
+      <input type="password" id="smtpPassword" formControlName="smtpPassword" class="form-control">
+    </div>
+
+ 
+    <hr style="width: -moz-available;">
+
+    <!-- System Settings -->
+    <h3>System Settings</h3>
+    <div class="form-group">
+      <label for="timezone">Timezone</label>
+      <input type="text" id="timezone" formControlName="timezone" class="form-control" placeholder="UTC">
+    </div>
+
+    <div class="form-group">
+      <label for="dateFormat">Date Format</label>
+      <input type="text" id="dateFormat" formControlName="dateFormat" class="form-control" placeholder="dd/MM/yyyy">
+    </div>
+
+    <!-- Feature Toggles -->
+    <div class="form-group">
+      <mat-slide-toggle formControlName="enableMultiCurrency">
+        Enable Multi-Currency
+      </mat-slide-toggle>
+    </div>
+
+    <div class="form-group">
+      <mat-slide-toggle formControlName="enableDiscounts">
+        Enable Discounts
+      </mat-slide-toggle>
+    </div>
 
     <!-- Submit Button -->
     <div class="form-group">

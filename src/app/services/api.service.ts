@@ -19,6 +19,11 @@ export class ApiService {
     return this.http.get<any>(`${this.apiUrl}${controller}`, { params });
   }
 
+   // Generic method to GET a singleton
+  getSingleton(controller: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}${controller}`);
+  }
+
   // Generic method to GET a single item by ID
   getById(controller: string, id: number): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}${controller}?id=${id}`);
@@ -32,6 +37,11 @@ export class ApiService {
   // Generic method to UPDATE an item by ID
   update(controller: string, id: number, data: any): Observable<any> {
     return this.http.put<any>(`${this.apiUrl}${controller}?id=${id}`, data);
+  }
+
+  // Generic method to UPDATE a singleton
+  updateSingleton(controller: string, data: any): Observable<any> {
+    return this.http.put<any>(`${this.apiUrl}${controller}`, data);
   }
 
   // Generic method to DELETE an item by ID
