@@ -39,6 +39,8 @@ export class ConfigsComponent implements OnInit {
           this.configsForm = this.fb.group({
             id: [response.result.id],
             useFtp: [response.result.useFtp ?? false],
+            useSmtp: [response.result.useSmtp ?? false],
+            useFolder: [response.result.useFolder ?? false],
             ftpServer: [response.result.ftpServer],
             ftpUsername: [response.result.ftpUsername],
             ftpPassword: [response.result.ftpPassword],
@@ -47,6 +49,7 @@ export class ConfigsComponent implements OnInit {
             smtpPort: [response.result.smtpPort],
             smtpUsername: [response.result.smtpUsername],
             smtpPassword: [response.result.smtpPassword],
+            folderAddress: [response.result.folderAddress],
             timezone: [response.result.timezone],
             dateFormat: [response.result.dateFormat],
             enableMultiCurrency: [response.result.enableMultiCurrency ?? true],
@@ -81,7 +84,6 @@ export class ConfigsComponent implements OnInit {
       }
     });
   }
-
 
   onSubmit(model:any) {
       this.apiService.updateSingleton('Configs/UpdateConfig', model).subscribe({
