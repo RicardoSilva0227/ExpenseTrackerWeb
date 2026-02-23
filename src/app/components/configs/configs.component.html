@@ -1,121 +1,99 @@
-<div class="form-container" *ngIf="configsForm">
-  <h2>Configs</h2>
-  <form [formGroup]="configsForm" (ngSubmit)="onSubmit(configsForm.value)" class="configs-form">
+<div class="page-header">
+  <div>
+    <div class="page-title">Configuration</div>
+    <div class="page-subtitle">Manage your system and integration settings</div>
+  </div>
+  <button class="btn btn-primary">Save Changes</button>
+</div>
 
-    <!-- Enable FTP Switch -->
+<!-- General Settings -->
+<div class="card">
+  <div class="card-title">⚙️ General</div>
+  <div class="form-row">
     <div class="form-group">
-      <mat-slide-toggle formControlName="useFtp">
-        Use FTP for invoices
-      </mat-slide-toggle>
+      <label>Timezone</label>
+      <select>
+        <option>GMT+1</option>
+      </select>
     </div>
-
-    <!-- Enable SMTP Switch -->
     <div class="form-group">
-      <mat-slide-toggle formControlName="useSmtp">
-        Use SMTP (Email) for invoices
-      </mat-slide-toggle>
+      <label>Date Format</label>
+      <select>
+        <option>dd/MM/yyyy</option>
+      </select>
     </div>
+  </div>
+  <div class="flex-center gap-md">
+    <label class="toggle-label">
+      <span class="toggle"><input type="checkbox" /><span class="toggle-slider"></span></span>
+      Enable Multi-Currency
+    </label>
+    <label class="toggle-label">
+      <span class="toggle"><input type="checkbox" /><span class="toggle-slider"></span></span>
+      Enable Discounts
+    </label>
+  </div>
+</div>
 
-    <!-- Enable Folder Switch -->
+<!-- Invoice Delivery -->
+<div class="card">
+  <div class="card-title">📨 Invoice Delivery</div>
+
+  <!-- Tabs -->
+  <div class="tabs">
+    <button class="tab active">FTP</button>
+    <button class="tab">Email</button>
+    <button class="tab">Folder</button>
+  </div>
+
+  <!-- FTP Tab Content -->
+  <div class="form-row">
     <div class="form-group">
-      <mat-slide-toggle formControlName="useFolder">
-        Use a folder for invoices
-      </mat-slide-toggle>
+      <label>FTP Server</label>
+      <input type="text" placeholder="ftp://127.0.0.1" />
     </div>
-
-    <!-- FTP Configs (only if useFtp is true) -->
-    <div *ngIf="configsForm.get('useFtp')?.value">
-      <h3>FTP Settings</h3>
-      <div class="form-group">
-        <label for="ftpServer">FTP Server</label>
-        <input type="text" id="ftpServer" formControlName="ftpServer" class="form-control"
-          placeholder="ftp://127.0.0.1">
-      </div>
-
-      <div class="form-group">
-        <label for="ftpUsername">FTP Username</label>
-        <input type="text" id="ftpUsername" formControlName="ftpUsername" class="form-control" placeholder="ftpuser">
-      </div>
-
-      <div class="form-group">
-        <label for="ftpPassword">FTP Password</label>
-        <input type="password" id="ftpPassword" formControlName="ftpPassword" class="form-control">
-      </div>
-
-      <div class="form-group">
-        <label for="ftpPort">FTP Port</label>
-        <input type="text" id="ftpPort" formControlName="ftpPort" class="form-control">
-      </div>
-
-      <hr>
-    </div>
-
-    <!-- Folder Configs (only if useFolder is true) -->
-    <div *ngIf="configsForm.get('useFolder')?.value">
-      <h3>Folder Settings</h3>
-      <div class="form-group">
-        <label for="folderAddress">Folder</label>
-        <input type="text" id="folderAddress" formControlName="folderAddress" class="form-control" placeholder="C:/folder">
-      </div>
-      <hr>
-    </div>
-
-    <!-- SMTP Settings (only if useSmtp is true)-->
-    <div *ngIf="configsForm.get('useSmtp')?.value">
-      <h3>Email Settings</h3>
-      <div class="form-group">
-        <label for="smtpServer">SMTP Server</label>
-        <input type="text" id="smtpServer" formControlName="smtpServer" class="form-control">
-      </div>
-
-      <div class="form-group">
-        <label for="smtpPort">SMTP Port</label>
-        <input type="text" id="smtpPort" formControlName="smtpPort" class="form-control">
-      </div>
-
-      <div class="form-group">
-        <label for="smtpUsername">SMTP Username</label>
-        <input type="text" id="smtpUsername" formControlName="smtpUsername" class="form-control">
-      </div>
-
-      <div class="form-group">
-        <label for="smtpPassword">SMTP Password</label>
-        <input type="password" id="smtpPassword" formControlName="smtpPassword" class="form-control">
-      </div>
-
-      <hr style="width: -moz-available;">
-    </div>
-
-
-
-    <!-- System Settings -->
-    <h3>System Settings</h3>
     <div class="form-group">
-      <label for="timezone">Timezone</label>
-      <input type="text" id="timezone" formControlName="timezone" class="form-control" placeholder="UTC">
+      <label>FTP Port</label>
+      <input type="number" placeholder="21" />
     </div>
-
+  </div>
+  <div class="form-row">
     <div class="form-group">
-      <label for="dateFormat">Date Format</label>
-      <input type="text" id="dateFormat" formControlName="dateFormat" class="form-control" placeholder="dd/MM/yyyy">
+      <label>Username</label>
+      <input type="text" />
     </div>
-
-    <!-- Feature Toggles -->
     <div class="form-group">
-      <mat-slide-toggle formControlName="enableMultiCurrency">
-        Enable Multi-Currency
-      </mat-slide-toggle>
+      <label>Password</label>
+      <input type="password" />
     </div>
+  </div>
 
+  <!-- Email Tab Content -->
+  <!-- <div class="form-row">
     <div class="form-group">
-      <mat-slide-toggle formControlName="enableDiscounts">
-        Enable Discounts
-      </mat-slide-toggle>
+      <label for="smtpServer">SMTP Server</label>
+      <input type="text" id="smtpServer" formControlName="smtpServer" class="form-control">
     </div>
+    <div class="form-group">
+      <label for="smtpPort">SMTP Port</label>
+      <input type="text" id="smtpPort" formControlName="smtpPort" class="form-control">
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group">
+      <label for="smtpUsername">SMTP Username</label>
+      <input type="text" id="smtpUsername" formControlName="smtpUsername" class="form-control">
+    </div>
+    <div class="form-group">
+      <label for="smtpPassword">SMTP Password</label>
+      <input type="password" id="smtpPassword" formControlName="smtpPassword" class="form-control">
+    </div>
+  </div>
 
-    <!-- Submit Button -->
+
+  <div class="form-row">
     <div class="form-group">
-      <button type="submit" class="submit-button" [disabled]="configsForm.invalid">Submit</button>
-    </div>
-  </form>
+      <label for="folderAddress">Folder</label>
+      <input type="text" id="folderAddress" formControlName="folderAddress" class="form-control" placeholder="C:/folder">
+    </div> -->
 </div>

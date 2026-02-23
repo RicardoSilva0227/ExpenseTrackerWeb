@@ -15,6 +15,7 @@ import {MatSelectModule} from '@angular/material/select';
 export class ExpenseTypeAddOrEditComponent {
   model: any;
   expenseTypesForm!: FormGroup; //the "!" tells angular to ignore if the class is already initialized or not
+  isEditing: boolean = false;
   private _id!: number;
 
   @Input()
@@ -35,6 +36,7 @@ export class ExpenseTypeAddOrEditComponent {
 
   initializeForm(){
     if (this._id) {
+      this.isEditing = true;
       this.apiService.getById('ExpensesTypes/GetExpenseType', this._id).subscribe({
         next: (response) => {
           if (response.isSuccess){
