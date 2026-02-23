@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { ModalComponent } from '../Modal/modal.component';
 
 
 @Component({
@@ -10,4 +12,13 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 })
 export class NavbarComponent {
 
+  constructor(private dialog: MatDialog) { }
+
+  openExportModal(): void {
+    this.dialog.open(ModalComponent, {
+      width: '400px',
+      data: { title: 'Export Expenses' }
+    });
+
+  }
 }
