@@ -18,6 +18,9 @@ export class ExpenseListComponent implements OnInit {
   pageSize: number = 10;
   pageNumber: number = 1;
 
+  currentPage: number = 1;
+  totalPages: number = 3;
+
   constructor(
     private apiService: ApiService,
     private router: Router,

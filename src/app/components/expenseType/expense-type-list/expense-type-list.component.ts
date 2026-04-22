@@ -17,6 +17,8 @@ export class ExpenseTypeListComponent {
   expenseTypes: any = [];
   pageSize: number = 10;
   pageNumber: number = 1;
+  currentPage: number = 1;
+  totalPages: number = 1;
 
   constructor(
     private apiService: ApiService,

@@ -17,6 +17,7 @@ export class ExpenseAddOrEditComponent implements OnInit {
   model: any;
   expenseForm!: FormGroup; //the "!" tells angular to ignore if the class is already initialized or not
   expenseTypes: any[] = [];
+  isEditing: boolean = false;
 
   private _id!: number;
 
@@ -38,6 +39,7 @@ export class ExpenseAddOrEditComponent implements OnInit {
 
   initializeForm(){
     if (this._id) {
+      this.isEditing = true;
       this.apiService.getById('Expenses/GetExpense', this._id).subscribe({
         next: (response) => {
           if (response.isSuccess){
@@ -101,9 +103,21 @@ export class ExpenseAddOrEditComponent implements OnInit {
     this.router.navigate(['Expense/List']);
   }
 
-  onSubmit(model:any) {
+  onSubmit() {
+  const formValue = this.expenseForm.value;
+
+  const payload = {
+    ...(this._id && { Id: formValue.Id }),
+    Code: formValue.Code,
+    Title: formValue.Title,
+    Amount: formValue.Amount,
+    Tin: formValue.Tin ? +formValue.Tin : null,
+    DateOfEmission: formValue.DateOfEmission,
+    ExpenseTypeId: +formValue.ExpenseTypeId
+  }
+
     if (this._id){
-      this.apiService.update('Expenses/UpdateExpense', this._id, model).subscribe({
+      this.apiService.update('Expenses/UpdateExpense', this._id, payload).subscribe({
         next: (response) => {
           if (response.isSuccess) {
             this.snackBar.open('Expense updated successfully!', 'Close', {
@@ -120,7 +134,7 @@ export class ExpenseAddOrEditComponent implements OnInit {
         }
       });
     } else {
-      this.apiService.create('Expenses/CreateExpense', model).subscribe({
+      this.apiService.create('Expenses/CreateExpense', payload).subscribe({
         next: (response) => {
           if (response.isSuccess) {
             this.snackBar.open('Expense added successfully!', 'Close', {

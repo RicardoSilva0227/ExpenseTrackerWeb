@@ -1,60 +1,74 @@
-<button type="button" class="btn btn-primary" (click)="goBack()">Go back</button>
-
-
-<div class="form-container" *ngIf="expenseForm">
-  <h2>Add Expense</h2>
-  <form [formGroup]="expenseForm" (ngSubmit)="onSubmit(this.expenseForm.value)" class="expense-form">
-    
-    <!-- Code Input -->
-    <div class="form-group">
-      <label for="Title">Title</label>
-      <input type="text" id="title" formControlName="Title" class="form-control">
-      <small *ngIf="expenseForm.controls['Title'].invalid && expenseForm.controls['Title'].touched" class="error-message">
-        Title is required (min. 3 characters).
-      </small>
+<div class="page-header">
+  <div>
+    <div class="page-title">
+      {{ isEditing ? 'Edit Expense' : 'Add Expense' }}
+      <span *ngIf="id" class="badge badge-warning" style="margin-left: 0.5rem;">Editing</span>
     </div>
-
-    <!-- Date Input -->
-    <div class="form-group">
-      <label for="DateOfEmission">Date of Emission</label>
-      <input type="date" id="dateOfEmission" formControlName="DateOfEmission" class="form-control">
-      <small *ngIf="expenseForm.controls['DateOfEmission'].invalid && expenseForm.controls['DateOfEmission'].touched" class="error-message">
-        Please enter a valid date.
-      </small>
-    </div>
-
-    <!-- Amount Input -->
-    <div class="form-group">
-      <label for="Amount">Amount (€)</label>
-      <input type="number" id="amount" formControlName="Amount" class="form-control">
-      <small *ngIf="expenseForm.controls['Amount'].invalid && expenseForm.controls['Amount'].touched" class="error-message">
-        Amount must be greater than zero.
-      </small>
-    </div>
-
-    <!-- TIN / NIF -->
-    <div class="form-group">
-      <label for="Amount">TIN / NIF</label>
-      <input type="number" id="tin" formControlName="Tin" class="form-control" [required]="false" [minlength]="9" [maxlength]="9">
-      <small *ngIf="expenseForm.controls['Tin'].invalid && expenseForm.controls['Tin'].touched" class="error-message">
-        Must have 9 numbers
-      </small>
-    </div>
-
-    <div class="form-group">
-      <mat-form-field appearance="outline" style="width: 100%;">
-        <mat-label>Expense Types</mat-label>
-        <mat-select id="ExpenseTypeId" formControlName="ExpenseTypeId">
-          <mat-option *ngFor="let expenseType of expenseTypes" [value]="expenseType.id">
-            {{ expenseType.code }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-    </div>  
-
-    <!-- Submit Button -->
-    <div class="form-group">
-      <button type="submit" class="submit-button" [disabled]="expenseForm.invalid">Submit</button>
-    </div>
-  </form>
+    <div class="page-subtitle">Fill in the details below</div>
+  </div>
+  <button type="button" class="btn btn-secondary" (click)="goBack()">Back</button>
 </div>
+
+<form [formGroup]="expenseForm" (ngSubmit)="onSubmit()" *ngIf="expenseForm">
+  <div class="card">
+    <div class="form-row">
+      <div class="form-group">
+        <label>Title</label>
+        <input type="text" formControlName="Title" />
+        <small class="error-message"
+          *ngIf="expenseForm.controls['Title'].invalid && expenseForm.controls['Title'].touched">
+          Title is required (min. 3 characters).
+        </small>
+      </div>
+      <div class="form-group">
+        <label>Date of Emission</label>
+        <input type="date" formControlName="DateOfEmission" />
+        <small class="error-message"
+          *ngIf="expenseForm.controls['DateOfEmission'].invalid && expenseForm.controls['DateOfEmission'].touched">
+          Please enter a valid date.
+        </small>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label>Amount (€)</label>
+        <input type="number" formControlName="Amount" />
+        <small class="error-message"
+          *ngIf="expenseForm.controls['Amount'].invalid && expenseForm.controls['Amount'].touched">
+          Amount must be greater than zero.
+        </small>
+      </div>
+      <div class="form-group">
+        <label>NIF</label>
+        <input type="number" id="tin" formControlName="Tin" [required]="false"/>
+        <small class="error-message" *ngIf="expenseForm.controls['Tin'].invalid && expenseForm.controls['Tin'].touched">
+          Must have 9 numbers.
+        </small>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label>Expense Type</label>
+        <select formControlName="ExpenseTypeId" id="ExpenseTypeId"> 
+          <option value="" disabled>Select a type</option>
+          <option *ngFor="let expenseType of expenseTypes" [value]="expenseType.id">
+            {{ expenseType.code }}
+          </option>
+        </select>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="flex-center">
+      <div class="ml-auto flex-center gap-sm">
+        <button type="submit" class="btn btn-primary" [disabled]="expenseForm.invalid">
+          {{ isEditing ? 'Save Changes' : 'Submit' }}
+        </button>
+      </div>
+    </div>
+
+  </div>
+</form>
