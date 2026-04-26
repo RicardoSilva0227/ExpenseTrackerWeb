@@ -7,6 +7,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { TIMEZONES, DATE_FORMATS, PAGINATION_SIZES, EXPORT_FORMATS } from '../../constants/config-options.constants';
 
 
 @Component({
@@ -22,6 +23,13 @@ export class ConfigsComponent implements OnInit {
   currencies: any[] = [];
   activeTab: string = 'ftp'
   showCurrencyModal = false;
+
+  // enums
+  timezones = TIMEZONES;
+  dateFormats = DATE_FORMATS;
+  paginationSizes = PAGINATION_SIZES;
+  exportFormats = EXPORT_FORMATS;
+
 
   constructor(
     private fb: FormBuilder,
@@ -57,12 +65,14 @@ export class ConfigsComponent implements OnInit {
             useFolder: [response.result.useFolder ?? false],
             folderAddress: [response.result.folderAddress ?? ''],
             // System
-            timezone: [response.result.timezone ?? 'UTC'],
+            timezone: [response.result.timezone ?? 'UTC+1'],
             dateFormat: [response.result.dateFormat ?? 'dd/MM/yyyy'],
             enableMultiCurrency: [response.result.enableMultiCurrency ?? true],
             enableDiscounts: [response.result.enableDiscounts ?? false],
+            defaultPaginationSize: [response.result.defaultPaginationSize ?? 25],
+            defaultExportSetting: [response.result.defaultExportSetting ?? 1],
             // Currency
-            defaultCurrencyId: [response.result.defaultCurrencyId ?? null],
+            defaultCurrencyId: [response.result.defaultCurrencyId ?? null]
           });
 
           // Set initial disabled state
