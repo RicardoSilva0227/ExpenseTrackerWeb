@@ -1,1 +1,89 @@
-<h1> Dashboard</h1>
+<div class="page-header">
+  <div>
+    <div class="page-title">Dashboard</div>
+    <div class="page-subtitle">Overview for {{ currentMonth }}</div>
+  </div>
+  <div class="period-btns">
+    <button class="btn btn-secondary btn-sm" [class.period-active]="selectedPeriod === 30" (click)="selectedPeriod = 30">30d</button>
+    <button class="btn btn-secondary btn-sm" [class.period-active]="selectedPeriod === 60" (click)="selectedPeriod = 60">60d</button>
+    <button class="btn btn-secondary btn-sm" [class.period-active]="selectedPeriod === 180" (click)="selectedPeriod = 180">6m</button>
+    <button class="btn btn-secondary btn-sm" [class.period-active]="selectedPeriod === 365" (click)="selectedPeriod = 365">1y</button>
+  </div>
+</div>
+
+<!-- ── Stat Cards ────────────────────────────────────────────────────────────── -->
+<div class="grid-4">
+  <div class="stat-card">
+    <div class="stat-label">💼 Wallet Balance</div>
+    <div class="stat-value">€ 3,200</div>
+    <div class="stat-sub">Net available</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-label">📈 Invested This Month</div>
+    <div class="stat-value">€ 200</div>
+    <div class="stat-sub invested">€ 2,400 this year</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-label">💳 Spent This Month</div>
+    <div class="stat-value">€ 1,240</div>
+    <div class="stat-sub">Updated today</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-label">📅 Spent This Year</div>
+    <div class="stat-value">€ 8,530</div>
+    <div class="stat-sub">Jan – {{ currentMonth }}</div>
+  </div>
+</div>
+
+<!-- ── Charts ────────────────────────────────────────────────────────────────── -->
+<div class="grid-2">
+
+  <div class="card">
+    <div class="card-title">🧩 Breakdown by Type</div>
+    <div class="chart-legend">
+      <span class="legend-item" *ngFor="let item of pieLabels; let i = index">
+        <span class="legend-dot" [style.background]="pieColors[i]"></span>
+        {{ item }} {{ pieData[i] }}%
+      </span>
+    </div>
+    <div class="chart-wrapper">
+      <canvas id="pieChart"></canvas>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📊 Monthly Spending Trend</div>
+    <div class="chart-wrapper">
+      <canvas id="barChart"></canvas>
+    </div>
+  </div>
+
+</div>
+
+<!-- ── Recent Expenses ───────────────────────────────────────────────────────── -->
+<div class="card">
+  <div class="card-title">
+    🕐 Recent Expenses
+    <span class="text-muted text-sm ml-auto">Last 30 days</span>
+  </div>
+  <div class="table-wrapper">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Type</th>
+          <th>Date</th>
+          <th style="text-align: right;">Amount</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let expense of recentExpenses">
+          <td>{{ expense.title }}</td>
+          <td><span class="badge" [ngClass]="expense.badgeClass">{{ expense.type }}</span></td>
+          <td class="text-muted">{{ expense.date }}</td>
+          <td style="text-align: right; font-weight: 600;">€ {{ expense.amount.toFixed(2) }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
