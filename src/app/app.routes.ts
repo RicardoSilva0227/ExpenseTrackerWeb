@@ -7,20 +7,26 @@ import { ExpenseTypeAddOrEditComponent } from './components/expenseType/expense-
 import { ConfigsComponent } from './components/configs/configs.component'
 
 export const routes: Routes = [
-  { path: 'Dashboard', component: DashboardComponent }, 
+  // Redirects for lowercase
+  { path: '', redirectTo: 'Dashboard', pathMatch: 'full' },
+  { path: 'dashboard', redirectTo: 'Dashboard', pathMatch: 'full' },
+  { path: 'expense/list', redirectTo: 'Expense/List', pathMatch: 'full' },
+  { path: 'expense/addoredit', redirectTo: 'Expense/AddOrEdit', pathMatch: 'full' },
+  { path: 'expensetype/list', redirectTo: 'ExpenseType/List', pathMatch: 'full' },
+  { path: 'expensetype/addoredit', redirectTo: 'ExpenseType/AddOrEdit', pathMatch: 'full' },
+  { path: 'configs', redirectTo: 'Configs', pathMatch: 'full' },
 
-  // Expenses
+  // Actual routes
+  { path: 'Dashboard', component: DashboardComponent },
   { path: 'Expense/List', component: ExpenseListComponent },
   { path: 'Expense/AddOrEdit', component: ExpenseAddOrEditComponent },
   { path: 'Expense/AddOrEdit/:id', component: ExpenseAddOrEditComponent },
-
-  // expense types
   { path: 'ExpenseType/List', component: ExpenseTypeListComponent },
   { path: 'ExpenseType/AddOrEdit', component: ExpenseTypeAddOrEditComponent },
   { path: 'ExpenseType/AddOrEdit/:id', component: ExpenseTypeAddOrEditComponent },
+  { path: 'Configs', component: ConfigsComponent },
 
-  // configs
-  {path: 'Configs', component: ConfigsComponent},
-
+  // Fallback
+  { path: '**', redirectTo: 'Dashboard' }
 ];
   
