@@ -74,11 +74,9 @@ export const environment = {
 };
 ```
 
-The app will know to use 
+The app will know which file to use 
 
 ---
-
-## Useful Commands
 
 ### Angular
 
@@ -90,22 +88,8 @@ ng generate component <name>
 
 ---
 
-## Roadmap (Planned Features)
-
-- Edit/Delete expenses
-- User authentication
-- Expense categories filtering
-- Dashboard & analytics
-- Persistent storage improvements
-
----
-
 ## Notes
 
 This is a learning / in-progress project. Expect breaking changes and incomplete features.
 
 ---
-
-## Contributing
-
-Feel free to fork the repo and experiment. Contributions are welcome once the project stabilizes.
